@@ -11,7 +11,7 @@ namespace Sistema.Datos
         {
             SqlDataReader Resultado;
             DataTable Tabla = new DataTable();
-            SqlConnection SqlCon = new SqlConnection;
+            SqlConnection SqlCon = new SqlConnection();
             try
             {
                 SqlCon = Conexion.getInstancia().CrearConexion();
@@ -36,7 +36,7 @@ namespace Sistema.Datos
         {
             SqlDataReader Resultado;
             DataTable Tabla = new DataTable();
-            SqlConnection SqlCon = new SqlConnection;
+            SqlConnection SqlCon = new SqlConnection();
             try
             {
                 SqlCon = Conexion.getInstancia().CrearConexion();
@@ -73,7 +73,9 @@ namespace Sistema.Datos
                 ParExiste.Direction = ParameterDirection.Output;
                 Comando.Parameters.Add(ParExiste);
                 SqlCon.Open();
-                Rpta = Comando.ExecuteNonQuery() == 1 ? "OK" : "No se pudo ingresar el registro";
+                Comando.ExecuteNonQuery();
+                Rpta = Convert.ToString(ParExiste.Value);
+
             }
             catch (Exception ex)
             {

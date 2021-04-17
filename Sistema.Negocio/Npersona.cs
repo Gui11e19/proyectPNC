@@ -11,12 +11,13 @@ namespace Sistema.Negocio
 {
     public class Npersona
     {
-        public DataTable Listar()
+        public static DataTable Listar()
         {
             Dpersona datos = new Dpersona();
             return datos.Listar();
+            
         }
-        public DataTable Buscar (string Valor)
+        public static DataTable Buscar (string Valor)
         {
             Dpersona datos = new Dpersona();
             return datos.Buscar(Valor);
@@ -24,12 +25,21 @@ namespace Sistema.Negocio
         public static string Insertar(string nombre, string apellido, string telefono, int edad)
         {
             Dpersona datos = new Dpersona();
-            persona Obj = new persona();
-            Obj.nombre = nombre;
-            Obj.apellido = apellido;
-            Obj.telefono = telefono;
-            Obj.edad = edad;
-            return datos.Insertar(Obj);
+            string Existe = datos.Existe(nombre);
+            if (Existe.Equals("1"))
+            {
+                return "La persona ya existe";
+            }
+            else
+            {
+                persona Obj = new persona();
+                Obj.nombre = nombre;
+                Obj.apellido = apellido;
+                Obj.telefono = telefono;
+                Obj.edad = edad;
+                return datos.Insertar(Obj);
+            }
+            
         }
     }
 }
